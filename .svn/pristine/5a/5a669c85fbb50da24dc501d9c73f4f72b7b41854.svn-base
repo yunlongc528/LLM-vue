@@ -1,0 +1,15 @@
+<template>
+    <SecondaryMenu :navigation="navigation" />
+    <router-view></router-view>
+
+</template>
+<script lang="ts" setup>
+import SecondaryMenu from '@/components/SecondaryMenu/SecondaryMenu.vue';
+const navigation = [
+    { name: 'Session Management', href: '#', current: true, path: '/sessions/sessions' },
+    { name: 'Kart Notes', href: '#', current: false, path: '/sessions/kartnotes' },
+    { name: 'Kart Performance', href: '#', current: false, path: '/sessions/kartperformance' },
+]
+
+
+</script>

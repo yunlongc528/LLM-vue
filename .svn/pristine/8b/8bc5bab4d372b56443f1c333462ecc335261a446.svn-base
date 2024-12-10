@@ -1,0 +1,124 @@
+<template>
+    <div id="histo" class="h-full"></div>
+</template>
+<script setup lang="ts">
+import * as echarts from 'echarts';
+import { onMounted } from 'vue';
+onMounted(() => {
+
+    var chartDom = document.getElementById('histo');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    let xAxisData = ['嫌疑人', '银行卡', '手机号', '虚拟账户', '虚拟空间', 'App', '地址'];
+    let data1 = [1, 2, 3];
+    let data2 = [];
+    let data3 = [];
+    for (let i = 0; i < 7; i++) {
+        data1.push(+(Math.random() * 2).toFixed(2));
+        data2.push(+(Math.random() * 5).toFixed(2));
+        data3.push(+(Math.random() + 0.3).toFixed(2));
+    }
+    const chartData = [
+        { category: '嫌疑人', initial: 2, adjusted: 9, extended: 9 },
+        { category: '银行卡', initial: 0, adjusted: 3, extended: 2 },
+        { category: '手机号', initial: 0, adjusted: 2, extended: 2 },
+        { category: '虚拟账户', initial: 0, adjusted: 2, extended: 2 },
+        { category: '虚拟空间', initial: 0, adjusted: 4, extended: 5 },
+        { category: 'App', initial: 0, adjusted: 2, extended: 4 },
+        { category: '地址', initial: 0, adjusted: 0, extended: 2 },
+    ]
+    option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            },
+            formatter: function (params) {
+                let tooltip = params[0].name + '<br/>'
+                params.forEach(param => {
+                    let seriesName = ''
+                    switch (param.seriesName) {
+                        case 'initial':
+                            seriesName = '初始要素'
+                            break
+                        case 'adjusted':
+                            seriesName = '调正次数'
+                            break
+                        case 'extended':
+                            seriesName = '拓展要素'
+                            break
+                    }
+                    tooltip += seriesName + ': ' + param.value + '<br/>'
+                })
+                return tooltip
+            }
+        },
+        legend: {
+            data: ['初始要素', '调正次数', '拓展要素']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            data: chartData.map(item => item.category)
+        },
+        yAxis: {
+            type: 'value',
+            max: 10
+        },
+        series: [
+            {
+                name: 'initial',
+                type: 'bar',
+                data: chartData.map(item => item.initial),
+                itemStyle: {
+                    color: '#4A90e2'
+                }
+            },
+            {
+                name: 'adjusted',
+                type: 'bar',
+                data: chartData.map(item => item.adjusted),
+                itemStyle: {
+                    color: '#50E3c2'
+                }
+            },
+            {
+                name: 'extended',
+                type: 'bar',
+                data: chartData.map(item => item.extended),
+                itemStyle: {
+                    color: '#8A4fff'
+                }
+            }
+        ]
+    }
+
+    myChart.on('brushSelected', function (params: any) {
+        var brushed = [];
+
+        myChart.setOption({
+            title: {
+                backgroundColor: '#333',
+                text: 'SELECTED DATA INDICES: \n' + brushed.join('\n'),
+                bottom: 0,
+                right: '10%',
+                width: 100,
+                textStyle: {
+                    fontSize: 12,
+                    color: '#fff'
+                }
+            }
+        });
+    });
+
+    option && myChart.setOption(option);
+
+})
+
+</script>

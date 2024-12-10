@@ -1,0 +1,18 @@
+<template>
+	<div class="pki">
+		<a
+			href="https://10.119.30.116:10011/cxdxzl/admin/user/cer?url=http://41.205.121.17/cxgaj-admin/pkilogin.direct"><img
+				src="../../../assets/pki1.png" class="pkibtn" /></a>
+	</div>
+</template>
+
+<script>
+
+// import pki1 from '/@/assets/pki1.png'
+
+</script>
+<style scoped>
+.pki {
+	text-align: center;
+}
+</style>

@@ -1,0 +1,177 @@
+<template>
+    <div id="histo" class="h-full"></div>
+</template>
+<script setup lang="ts">
+import * as echarts from 'echarts';
+import { onMounted } from 'vue';
+onMounted(() => {
+
+    var chartDom = document.getElementById('histo');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    let xAxisData = ['嫌疑人', '银行卡', '手机号', '虚拟账户', '虚拟空间', 'App', '地址'];
+    let data1 = [1, 2, 3];
+    let data2 = [];
+    let data3 = [];
+    for (let i = 0; i < 7; i++) {
+        data1.push(+(Math.random() * 2).toFixed(2));
+        data2.push(+(Math.random() * 5).toFixed(2));
+        data3.push(+(Math.random() + 0.3).toFixed(2));
+    }
+    var emphasisStyle = {
+        itemStyle: {
+            shadowBlur: 10,
+            shadowColor: 'rgba(0,0,0,0.3)'
+        }
+    };
+    option = {
+        legend: {
+            data: ['初始要素', '调正次数', '拓展要素'],
+            left: '10%'
+        },
+
+        toolbox: {
+            feature: {
+                magicType: {
+                    type: ['stack']
+                },
+                dataView: {}
+            }
+        },
+        tooltip: {},
+        xAxis: {
+            data: xAxisData,
+            name: 'X Axis',
+            axisLine: { onZero: true },
+            splitLine: { show: false },
+            splitArea: { show: false }
+        },
+        yAxis: {},
+        grid: {
+            bottom: 100
+        },
+        series: [
+            {
+                name: '初始要素',
+                type: 'bar',
+                stack: 'three',
+                emphasis: emphasisStyle,
+                data: [
+                    {
+                        value: 2, name: '含一个要素', itemStyle: {
+                            color: '#4A90E2'
+                        }
+                    },
+                    {
+                        value: 2, name: '含二个要素', itemStyle: {
+                            color: '#4A90E2'
+                        }
+                    },
+
+                ]
+            },
+            {
+                name: '调正次数',
+                type: 'bar',
+                stack: 'one',
+                emphasis: emphasisStyle,
+                data: [
+                    {
+                        value: 9, name: '含一个要素', itemStyle: {
+                            color: '#8A4FFF'
+                        }
+                    },
+                    {
+                        value: 3, name: '含二个要素', itemStyle: {
+                            color: '#8A4FFF'
+                        }
+                    }, {
+                        value: 2, name: '含二个要素', itemStyle: {
+                            color: '#8A4FFF'
+                        }
+                    }, {
+                        value: 2, name: '含二个要素', itemStyle: {
+                            color: '#8A4FFF'
+                        }
+                    }, {
+                        value: 4, name: '含二个要素', itemStyle: {
+                            color: '#8A4FFF'
+                        }
+                    }, {
+                        value: 2, name: '含二个要素', itemStyle: {
+                            color: '#8A4FFF'
+                        }
+                    },
+
+                ]
+            },
+            {
+                name: '拓展要素',
+                type: 'bar',
+                stack: 'two',
+                emphasis: emphasisStyle,
+                data: [
+                    {
+                        value: 9, name: '含一个要素', itemStyle: {
+                            color: '#50E3C2'
+                        }
+                    },
+                    {
+                        value: 2, name: '含二个要素', itemStyle: {
+                            color: '#50E3C2'
+                        }
+                    }, {
+                        value: 2, name: '含二个要素', itemStyle: {
+                            color: '#50E3C2'
+                        }
+                    }, {
+                        value: 2, name: '含二个要素', itemStyle: {
+                            color: '#50E3C2'
+                        }
+                    }, {
+                        value: 5, name: '含二个要素', itemStyle: {
+                            color: '#50E3C2'
+                        }
+                    }, {
+                        value: 4, name: '含二个要素', itemStyle: {
+                            color: '#50E3C2'
+                        }
+                    }, {
+                        value: 2, name: '含二个要素', itemStyle: {
+                            color: '#50E3C2'
+                        }
+                    },
+
+                ]
+            }
+        ]
+    };
+
+    myChart.on('brushSelected', function (params: any) {
+        var brushed = [];
+        var brushComponent = params.batch[0];
+        for (var sIdx = 0; sIdx < brushComponent.selected.length; sIdx++) {
+            var rawIndices = brushComponent.selected[sIdx].dataIndex;
+            brushed.push('[Series ' + sIdx + '] ' + rawIndices.join(', '));
+        }
+        myChart.setOption({
+            title: {
+                backgroundColor: '#333',
+                text: 'SELECTED DATA INDICES: \n' + brushed.join('\n'),
+                bottom: 0,
+                right: '10%',
+                width: 100,
+                textStyle: {
+                    fontSize: 12,
+                    color: '#fff'
+                }
+            }
+        });
+    });
+
+    option && myChart.setOption(option);
+
+})
+
+</script>

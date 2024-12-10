@@ -1,0 +1,2 @@
+VUE_APP_API_BASE_URL=https://real-api.com/api  # 真实 API 基础路径
+VUE_APP_USE_MOCK=false  # 不启用 Mock 数据

@@ -1,0 +1,83 @@
+import { RouteRecordRaw } from 'vue-router'
+export const constantRoute: RouteRecordRaw[] = [
+    {
+        path: '/',
+        name: 'layout',
+        component: () => import('@/layout/BasicLayout.vue'),
+        redirect: '/large-model/homeLayout',
+        children: [
+            {
+                path: '/large-model/homeLayout',
+                name: 'posMenu',
+                component: () => import('@/views/home/homeLayout.vue'),
+
+                meta: { title: 'menu.list.table-list', keepAlive: true },
+            },
+            {
+                path: '/large-model/case-analysis',
+                name: 'case',
+                component: () => import('@/views/case/caseAnalysis.vue'),
+                meta: {
+                    title: '案件研判',
+                    keepAlive: false,
+                },
+            },
+            {
+                path: '/large-model/case-detail/:id',
+                name: 'caseDetail',
+                component: () => import('@/views/case/caseDetail.vue'),
+                children: [
+                    {
+                        path: '/large-model/case-detail/:id/analysis',
+                        name: 'caseDetailAnalysis',
+                        component: () =>
+                            import('@/views/case/caseDetailAnalysis/index.vue'),
+                    },
+                ],
+            },
+            {
+                path: '/sessions',
+                name: 'Sessions',
+                component: () => import('@/views/sessions/sessionLayout.vue'),
+                redirect: '/sessions/sessions',
+
+                meta: { title: 'menu.list.table-list', keepAlive: true },
+                children: [],
+            },
+        ],
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: () => import('@/views/login/LoginPage.vue'),
+    },
+    {
+        path: '/exception/403',
+        name: '403',
+        component: () => import('@/views/exception/403.vue'),
+    },
+    // {
+    //     path: '/:pathMatch(.*)*',
+    //     redirect: '/404',
+    //     name: 'any',
+    // },
+]
+export const asyncRoute = []
+export const navigation = [
+    { name: 'POS', path: '/pos', current: true },
+    { name: 'SESSIONS', path: '/sessions', current: true },
+    { name: 'CLIENTS', path: '/a/b', current: true },
+    { name: 'Calendar', path: '/calendar', current: true },
+    { name: 'VIDEOS', path: '/a/b', current: true },
+]
+export const posNavigation = [
+    { name: 'POS', href: '#', current: true, path: '/pos/pos' },
+    {
+        name: 'Kiosk Orders',
+        href: '#',
+        current: false,
+        path: '/pos/kioskOrder',
+    },
+    { name: 'ORDERS', href: '#', current: false, path: '/pos/orders' },
+    { name: 'sessions', href: '#', current: false, path: '/pos/sessions' },
+]
