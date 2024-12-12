@@ -1,16 +1,15 @@
 {
-  "name": "employee",
+  "name": "llm-vue",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --open",
+    "dev": "node scripts/preinstall.js && vite  --open", 
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --fix ",
+    "lint": "eslint \"src/**/*.{js,ts,vue}\" --fix",
     "prepare": "husky install",
     "preinstall": "node ./scripts/preinstall.js",
-    "build:pro": "vue-tsc && vite build --mode production",
     "build:test": "vue-tsc && vite build --mode test",
     "tail": "tailwindcss -i ./src/style.css -o ./src/output.css --watch"
   },
@@ -28,7 +27,6 @@
     "axios": "^1.7.7",
     "chart.js": "^4.4.5",
     "dayjs": "^1.11.13",
-    "element-plus": "^2.8.3",
     "lucide-vue-next": "^0.462.0",
     "nprogress": "^0.2.0",
     "pinia": "^2.2.2",

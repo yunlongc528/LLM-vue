@@ -46,7 +46,7 @@
 
 <script setup>
 import { ref } from 'vue'
-// import { InfoIcon, CheckCircleIcon, AlertCircleIcon, XCircleIcon, XIcon } from 'lucide-vue-next'
+import { InfoIcon, CheckCircleIcon, AlertCircleIcon, XCircleIcon, XIcon } from 'lucide-vue-next'
 
 const notifications = ref([])
 

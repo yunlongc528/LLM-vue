@@ -15,7 +15,7 @@ let hasSetStorage = false
 
 const options = Object.assign(
     {
-        namespace: 'ls_', // key prefix
+        namespace: 'GA_', // key prefix
         storage: 'localStorage', // storage name session, local, memory
         default_cache_time: 60 * 60 * 24 * 7,
         isEncrypt: false,

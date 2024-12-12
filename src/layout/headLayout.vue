@@ -50,6 +50,7 @@
                                             {{ item.name }}
                                             <span class="absolute inset-0" />
                                         </router-link>
+
                                     </div>
                                 </div>
                             </div>
@@ -77,9 +78,9 @@
 
                                     慈溪市公安局
                                 </div>
-                                <router-link class="text-center hover:bg-sky-100">
+                                <button @click="Logout" class="text-center hover:bg-sky-100">
                                     退出登录
-                                </router-link>
+                                </button>
                             </div>
                         </PopoverPanel>
                     </transition>
@@ -149,30 +150,28 @@ import {
     PopoverGroup,
     PopoverPanel,
 } from '@headlessui/vue'
+import { useUserMenuList } from '@/store/userMenu'
+const UserMenuList = useUserMenuList()
 import {
-
     Bars3Icon,
     ChartPieIcon,
-
     XMarkIcon,
 } from '@heroicons/vue/24/outline'
-import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
+import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 
-const management = [
-    { name: '问卷调查', description: '', href: '/large-model/question-management', icon: ChartPieIcon },
-
-]
+const management = UserMenuList.management
 const menu = [
     { name: '首页', href: '/large-model/homeLayout' },
     { name: '案件研判', href: '/large-model/case-analysis' },
     { name: '价值实体库', href: '/large-model/entity-library' },
     { name: '笔录助手', href: '/large-model/a' },
     { name: '执法监督', href: '/large-model/a' },
-    { name: '情报知识库', href: '/large-model/a', }]
-const callsToAction = [
-    { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
-    { name: 'Contact sales', href: '#', icon: PhoneIcon },
+    { name: '情报知识库', href: '/large-model/a' }
 ]
 
 const mobileMenuOpen = ref(false)
+const Logout = () => {
+    localStorage.clear()
+    window.location.reload()
+}
 </script>

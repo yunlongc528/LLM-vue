@@ -1,7 +1,7 @@
-// if (!/pnpm/.test(process.env.npm_execapth || '')) {
-//     console.warn(
-//         `\u001b[33mThis repo is using pnpm as package manager.` +
-//             `for scripts to wprek properlu.\u001b[39m\n]`,
-//     )
-//     process.exit(1)
-// }
+const manager = process.env.npm_execpath || ''
+if (!manager.includes('pnpm')) {
+    console.error(
+        "\x1b[31mThis project must be run with pnpm. Please use 'pnpm run dev'.\x1b[0m",
+    )
+    process.exit(1)
+}

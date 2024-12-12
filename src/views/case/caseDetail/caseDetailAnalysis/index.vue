@@ -1,5 +1,5 @@
 <template>
-    <div class="flex bg-gray-100 h-5/6">
+    <div class="flex bg-gray-100 min-h-full">
         <!-- Left Section: Original Case -->
         <div class="w-1/3 bg-white rounded-lg shadow-md p-4 mr-4">
             <div class="flex justify-between items-center mb-4">

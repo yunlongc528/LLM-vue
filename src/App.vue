@@ -3,10 +3,7 @@
 </template>
 <script setup lang="ts">
 import { computed, ref, onErrorCaptured, h } from 'vue'
-import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
-import en from 'element-plus/dist/locale/en.mjs'
-const language = ref('zh-cn')
-const locale = computed(() => (language.value === 'zh-cn' ? zhCn : en))
+
 import { notify } from '@/plugins/notificate/notification-plugin'
 
 onErrorCaptured((err, instance, info) => {

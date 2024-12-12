@@ -1,91 +1,93 @@
-import { close, start } from '@/utils/nprogress/'
-import type { Router } from 'vue-router'
-import { ACCESS_TOKEN, PERMISSION } from '@/store/mutation-types'
+import { start, close } from '@/utils/nprogress'
 import ls from '@/utils/Storage'
+import { ACCESS_TOKEN, PERMISSION, USER_INFO } from '@/store/mutation-types'
+import type { Router, RouteLocationNormalized } from 'vue-router'
+import { notify } from '@/plugins/notificate/notification-plugin'
 import { hasPermission } from './permission'
 
-import { setDocumentTitle } from '@/utils/domUtil'
-const defaultRoutePath = '/pos/pos'
 const whiteList = [
-    'surveyAnalysis',
-    'caseDetailAnalysis',
-    'recordAnalysis',
     'home',
-    'case',
-    'scoutingMap',
-    'login',
     'entity',
     'question',
     'admin',
-] // 不进行拦截的路由名称集合
-import { notify } from '@/plugins/notificate/notification-plugin'
-// const { notify } = useNotification()
+    'surveyAnalysis',
+    'caseDetailAnalysis',
+    'recordAnalysis',
+    'scoutingMap',
+    'case',
+] // 已开发完成的页面
+const defaultRoutePath = '/large-model/homeLayout'
+
+// 检查是否在白名单内
+function isInWhiteList(to: RouteLocationNormalized): boolean {
+    return to.name && typeof to.name === 'string' && whiteList.includes(to.name)
+}
+
+// 处理未登录情况
+function handleUnauthenticated(to: RouteLocationNormalized, next: Function) {
+    if (to.path === '/login') {
+        next()
+    } else {
+        notify({
+            type: 'info',
+            title: '请重新登录',
+            message: '您需要登录后才能访问此页面',
+            duration: 2000,
+        })
+        next({ path: '/login', query: { redirect: to.fullPath } })
+    }
+}
+
+// 处理已登录情况
+function handleAuthenticated(to: RouteLocationNormalized, next: Function) {
+    if (to.path === '/login') {
+        next({ path: defaultRoutePath })
+        return
+    }
+
+    const permission = ls.get(PERMISSION)
+    const canAccess = hasPermission(permission, to)
+
+    console.log(
+        'Permissions:',
+        permission,
+        'Can Access:',
+        canAccess,
+        'To Path:',
+        to.path,
+    )
+
+    if (canAccess && isInWhiteList(to)) {
+        next()
+    } else {
+        notify({
+            type: 'info',
+            title: '正在开发中',
+            message: '敬请期待',
+            duration: 2000,
+        })
+        // next({ path: '/exception/403' })
+    }
+}
 
 export const setupBeforeEach = (router: Router) => {
     router.beforeEach((to, from, next) => {
-        // console.log(ls.get(ACCESS_TOKEN), ls.get(PERMISSION))
-        setDocumentTitle(to)
+        start() // 开始加载进度条
 
-        console.log('beforeEach', to)
-        if (whiteList.includes(to.name as any)) {
-            start()
+        const isAuthenticated = ls.get(ACCESS_TOKEN) && ls.get(PERMISSION)
 
-            next()
+        if (isAuthenticated) {
+            handleAuthenticated(to, next)
         } else {
-            notify({
-                type: 'info',
-                title: '该功能正在开发中',
-                message: '敬请期待',
-                duration: 2000,
-            })
+            handleUnauthenticated(to, next)
         }
-        // if (ls.get(ACCESS_TOKEN)) {
-        //     /* has token */
-        //     if (to.path === '/login') {
-        //         next({ path: defaultRoutePath })
-        //         close()
-        //     } else {
-        //         const permission = ls.get(PERMISSION)
-        //         const canAccess = hasPermission(permission, to)
 
-        //         if (canAccess) {
-        //             next()
-        //         } else {
-        //             next({ path: '/exception/403' })
-        //         }
-        //     }
-        // } else {
-        //     if (whiteList.includes(to.name as string)) {
-        //         // 在免登录白名单，直接进入
-        //         next()
-        //     } else {
-        //         next({ path: '/login', query: { redirect: to.fullPath } })
-        //         close() // if current page is login will not trigger afterEach hook, so manually handle it
-        //     }
-        // }
-    })
-
-    // 路由懒加载失败时的提示
-    router.onError((error) => {
-        // if (window.env === 'localhost') {
-        //     notification.error({
-        //         message: 'Dynamic import error',
-        //         description: error.stack,
-        //     })
-        // } else {
-        //     router.push({ name: 'error', params: { errorMsg: error.stack } })
-        // }
-        console.log(error)
-        // notify({
-        //     type: 'error',
-        //     title: '访问被拒绝',
-        //     message: '请先登录以访问此页面',
-        //     duration: 5000,
-        // })
+        close() // 确保每次导航结束后关闭加载进度条
     })
 }
+
 export const setupAfterEach = (router: Router) => {
     router.afterEach(() => {
-        close() // finish progress bar
+        close() // 关闭加载进度条
     })
 }

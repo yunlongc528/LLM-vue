@@ -1,5 +1,6 @@
 import { RouteRecordRaw } from 'vue-router'
-import { NavigationItem } from './type'
+
+// 静态路由
 export const constantRoute: RouteRecordRaw[] = [
     {
         path: '/',
@@ -10,26 +11,29 @@ export const constantRoute: RouteRecordRaw[] = [
             {
                 path: '/large-model/homeLayout',
                 name: 'home',
-                component: () => import('@/views/home/homeLayout.vue'),
-
+                component: () =>
+                    import(/* webpackPreload: true */ '@/views/home/index.vue'),
                 meta: { title: '首页', keepAlive: true },
             },
             {
                 path: '/large-model/case-analysis',
                 name: 'case',
-                component: () => import('@/views/case/caseAnalysis/index.vue'),
-                meta: {
-                    title: '案件研判',
-                    keepAlive: false,
-                },
+                component: () =>
+                    import(
+                        /* webpackPrefetch: true */ '@/views/case/caseAnalysis/index.vue'
+                    ),
+                meta: { title: '案件研判', keepAlive: false },
             },
             {
                 path: '/large-model/case-detail/:id',
                 name: 'caseDetail',
-                component: () => import('@/views/case/caseDetail/index.vue'),
+                component: () =>
+                    import(
+                        /* webpackPrefetch: true */ '@/views/case/caseDetail/index.vue'
+                    ),
                 children: [
                     {
-                        path: '/large-model/case-detail/:id/analysis',
+                        path: 'analysis',
                         name: 'caseDetailAnalysis',
                         component: () =>
                             import(
@@ -37,7 +41,7 @@ export const constantRoute: RouteRecordRaw[] = [
                             ),
                     },
                     {
-                        path: '/large-model/case-detail/:id/survey',
+                        path: 'survey',
                         name: 'surveyAnalysis',
                         component: () =>
                             import(
@@ -45,7 +49,7 @@ export const constantRoute: RouteRecordRaw[] = [
                             ),
                     },
                     {
-                        path: '/large-model/case-detail/:id/record',
+                        path: 'record',
                         name: 'recordAnalysis',
                         component: () =>
                             import(
@@ -53,7 +57,7 @@ export const constantRoute: RouteRecordRaw[] = [
                             ),
                     },
                     {
-                        path: '/large-model/case-detail/:id/scoutingMap',
+                        path: 'scoutingMap',
                         name: 'scoutingMap',
                         component: () =>
                             import(
@@ -61,7 +65,7 @@ export const constantRoute: RouteRecordRaw[] = [
                             ),
                     },
                     {
-                        path: '/large-model/case-detail/:id/ValueEntity',
+                        path: 'ValueEntity',
                         name: 'valueEntity',
                         component: () =>
                             import(
@@ -76,18 +80,16 @@ export const constantRoute: RouteRecordRaw[] = [
                 component: () =>
                     import('@/views/valueEntity/personnel/index.vue'),
                 meta: {
-                    title: '价值实体库',
+                    roles: ['user'],
                     keepAlive: false,
+                    title: '价值实体库',
                 },
             },
             {
                 path: '/large-model/question-management',
                 name: 'question',
                 component: () => import('@/views/management/index.vue'),
-                meta: {
-                    title: '问卷调查',
-                    keepAlive: false,
-                },
+                meta: { roles: ['user'], keepAlive: false, title: '问卷调查' },
             },
         ],
     },
@@ -97,37 +99,21 @@ export const constantRoute: RouteRecordRaw[] = [
         component: () => import('@/views/login/LoginPage.vue'),
     },
     {
-        path: '/admin',
-        name: 'admin',
-        component: () => import('@/views/admin/home/index.vue'),
-    },
-    {
         path: '/exception/403',
         name: '403',
         component: () => import('@/views/exception/403.vue'),
     },
-    // {
-    //     path: '/:pathMatch(.*)*',
-    //     redirect: '/404',
-    //     name: 'any',
-    // },
-]
-export const asyncRoute: RouteRecordRaw[] = []
-export const navigation: NavigationItem[] = [
-    { name: 'POS', path: '/pos', current: true },
-    { name: 'SESSIONS', path: '/sessions', current: true },
-    { name: 'CLIENTS', path: '/a/b', current: true },
-    { name: 'Calendar', path: '/calendar', current: true },
-    { name: 'VIDEOS', path: '/a/b', current: true },
-]
-
-export const posNavigation: NavigationItem[] = [
-    { name: 'POS', current: true, path: '/pos/pos' },
     {
-        name: 'Kiosk Orders',
-        current: false,
-        path: '/pos/kioskOrder',
+        path: '/:pathMatch(.*)*',
+        redirect: '/exception/403',
+        name: 'notFound',
     },
-    { name: 'ORDERS', current: false, path: '/pos/orders' },
-    { name: 'sessions', current: false, path: '/pos/sessions' },
+]
+export const privateRoutes = [
+    {
+        path: '/admin',
+        name: 'admin',
+        component: () => import('@/views/admin/home/index.vue'),
+        meta: { roles: ['admin'] },
+    },
 ]

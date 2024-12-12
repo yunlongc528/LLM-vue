@@ -85,7 +85,7 @@ import CaseTable from './CaseTable.vue';
 import { TransitionRoot, TransitionChild } from "@headlessui/vue";
 import AddCase from './AddCase.vue';
 import CaseSearch from './CaseSearch.vue';
-import { fa } from 'element-plus/es/locale';
+
 import axios from 'axios'
 
 interface Tab {
@@ -161,7 +161,6 @@ const showHistory = (): void => {
 onMounted(() => {
     axios.get('/api/caselist').then(response => {
         tableList.value = response.data.data.users
-        console.log(response.data.data.users)
     })
 })
 </script>
