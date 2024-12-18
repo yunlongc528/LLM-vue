@@ -2,9 +2,9 @@
     <div @mouseleave="showMoreAction = false" class="node-container" :class="{ highlighted: isHighlighted }">
         <div class="main-area">
             <div class="main-info">
-                <div :style="{ backgroundColor: NODE_TYPE_LOGO[node.data.type]?.caseColor }"
-                    class="rounded-sm flex p-1">
-                    <i class="node-logo" :style="{ backgroundImage: `url(${NODE_TYPE_LOGO[node.data.type]?.svg})` }" />
+                <div :style="{ backgroundColor: NODE_TYPE_LOGO[node.data.type]?.caseColor }" class="rounded-sm flex ">
+                    <SvgIcon :name="NODE_TYPE_LOGO[node.data.type]?.name" width="40px" height="40px" class="p-1" />
+
 
                 </div>
                 <div class="ellipsis-row node-name">
@@ -85,6 +85,7 @@ import { Graph, Node, Edge, StringExt } from '@antv/x6'
 const props = defineProps<{
     node: any
 }>()
+import SvgIcon from '@/components/SvgIcon/index.vue'
 
 let showMoreAction = ref(false)
 // const plusActionSelected = ref(false)

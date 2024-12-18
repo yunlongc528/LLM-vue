@@ -26,26 +26,32 @@ export const NODE_TYPE_LOGO = {
     case: {
         svg: 'public/bilu.svg',
         caseColor: '#ff5e5e',
+        name: 'bilu',
     },
 
     bankcard: {
         svg: 'public/bankcard.svg',
         caseColor: '#ffc27d',
+        name: 'bankcard',
     },
     website: {
         svg: 'public/website.svg',
         caseColor: '#bf87eb',
+        name: 'website',
     },
     person: {
         svg: 'public/person.svg',
         caseColor: '#5ea1ff',
+        name: 'person',
     },
     phone: {
         svg: 'public/phone.svg',
         caseColor: '#87dc6a',
+        name: 'phone',
     },
     location: {
         svg: 'public/location1.svg',
         caseColor: 'white',
+        name: 'location1',
     },
 }

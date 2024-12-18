@@ -2,10 +2,9 @@
     <div @mouseleave="showMoreAction = false" class="node-container" :class="{ highlighted: isHighlighted }">
         <div class="main-area" @click="openDrawer">
             <div class="main-info">
-                <div :style="{ backgroundColor: NODE_TYPE_LOGO[node.data.type]?.caseColor }"
-                    class="rounded-sm flex p-1">
-                    <i class="node-logo" :style="{ backgroundImage: `url(${NODE_TYPE_LOGO[node.data.type]?.svg})` }" />
-
+                <div :style="{ backgroundColor: NODE_TYPE_LOGO[node.data.type]?.caseColor }" class="rounded-sm flex ">
+                    <!-- <i :style="{ backgroundImage: `url(${NODE_TYPE_LOGO[node.data.type]?.svg})` }" /> -->
+                    <SvgIcon :name="NODE_TYPE_LOGO[node.data.type]?.name" width="40px" height="40px" class="p-1" />
                 </div>
                 <div class="ellipsis-row node-name">
                     <div class="title">{{ node.data.name }}</div>
@@ -71,6 +70,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import cDrawers from '@/components/cDrawers/index.vue';
 import { NODE_TYPE_LOGO } from './constants'
 import MindMapDrawer from '@/components/MindMapDrawer/index.vue';
+import SvgIcon from '@/components/SvgIcon/index.vue'
 const props = defineProps<{
     node: any
 }>()
@@ -185,11 +185,11 @@ ports.forEach((port) => {
 
 .node-logo {
     display: inline-block;
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 100%;
+    background-size: 150%;
 }
 
 .line {
