@@ -1,11 +1,14 @@
 <template>
-    <div class="min-h-screen bg-white p-2">
+    <div class="min-h-[85vh] bg-white p-6">
         <!-- Navigation Tabs -->
-        <div class="flex gap-6 mb-2">
-            <button :class="['px-4 py-2 text-blue-600 border-b-2 border-blue-600']">
-                问卷调查
-            </button>
+        <div class="flex items-center text-sm text-gray-600 mb-6">
+            <span>首页</span>
+            <span class="mx-2">/</span>
+            <span>系统设置</span>
+            <span class="mx-2">/</span>
+            <span>问卷调查</span>
         </div>
+
 
         <!-- Statistics Section -->
         <div class="grid lg:grid-cols-6  sm:grid-cols-2 gap-3 mb-3 p-3">
@@ -43,7 +46,7 @@
         </div>
 
         <!-- Data Table Section -->
-        <div class="bg-white rounded-lg shadow p-6">
+        <div class="bg-white rounded-lg shadow ">
             <Table :data="tableData" :columns="columns" :height="350">
                 <template #empty>
                     <div class="flex flex-col items-center justify-center p-16 text-gray-500">
@@ -100,19 +103,7 @@
             <div v-if="tableData.length != 0">
                 <pagination :totalItems="100" :itemsPerPage="10" />
             </div>
-            <Popover class="relative">
-                <PopoverButton>Solutions</PopoverButton>
 
-                <PopoverPanel class="absolute z-10">
-                    <div class="grid grid-cols-2">
-                        <a href="/analytics">Analytics</a>
-                        <a href="/engagement">Engagement</a>
-                        <a href="/security">Security</a>
-                        <a href="/integrations">Integrations</a>
-                    </div>
-
-                </PopoverPanel>
-            </Popover>
         </div>
     </div>
 </template>
@@ -121,11 +112,9 @@
 import { ref } from 'vue'
 import Pagination from '@/components/Pagination/index.vue';
 import DataPicker from '@/components/DatePicker/index.vue';
-import { Popover, PopoverButton, PopoverPanel, PopoverOverlay } from '@headlessui/vue'
 import Table from '@/components/Table/index.vue'
 
 import { Inbox as IconInbox } from 'lucide-vue-next';
-import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 const columns = [
     { prop: 'date', label: '案件名称', width: 150, fixed: true },
     { prop: 'name', label: '提交用户', width: 120 },

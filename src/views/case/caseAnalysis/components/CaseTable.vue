@@ -90,8 +90,10 @@
 
             </tbody>
         </table>
-        <Pagination :totalItems="97" :itemsPerPage="10" @page-changed="onPageChange" />
+        <div class="float-right m-3">
+            <Pagination v-model:currentPage="page" :total-pages="3" @change="onPageChange" />
 
+        </div>
         <CaseDrawers :caseInfos="caseInfo" :open="caseDrawerOpen" title="My Custom Panel"
             @close="caseDrawerOpen = false">
 
@@ -147,6 +149,7 @@ const toggleStar = (caseItem: CaseItem): void => {
 const truncate = (text: string, length: number): string => {
     return text?.length > length ? text?.slice(0, length) + '...' : text;
 };
+const page = ref(1)
 const onPageChange = (page) => {
     console.log('Page changed to:', page);
     // 在这里执行你需要的操作

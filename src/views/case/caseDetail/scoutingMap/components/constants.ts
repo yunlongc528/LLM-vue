@@ -24,28 +24,28 @@ export const PROCESSING_TYPE_LIST = [
 
 export const NODE_TYPE_LOGO = {
     case: {
-        svg: 'src/assets/icons/bilu.svg',
+        svg: 'public/bilu.svg',
         caseColor: '#ff5e5e',
     },
 
     bankcard: {
-        svg: 'src/assets/icons/bankcard.svg',
+        svg: 'public/bankcard.svg',
         caseColor: '#ffc27d',
     },
     website: {
-        svg: 'src/assets/icons/website.svg',
+        svg: 'public/website.svg',
         caseColor: '#bf87eb',
     },
     person: {
-        svg: 'src/assets/icons/person.svg',
+        svg: 'public/person.svg',
         caseColor: '#5ea1ff',
     },
     phone: {
-        svg: 'src/assets/icons/phone.svg',
+        svg: 'public/phone.svg',
         caseColor: '#87dc6a',
     },
     location: {
-        svg: 'src/assets/icons/location1.svg',
+        svg: 'public/location1.svg',
         caseColor: 'white',
     },
 }

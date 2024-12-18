@@ -34,6 +34,7 @@
                                             账号</label>
                                         <div class="mt-2">
                                             <input id="email" name="email" autocomplete="email" required="true"
+                                                v-model="formRef.username"
                                                 class="block w-full rounded-md border-0 pl-3 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                         </div>
                                     </div>
@@ -43,7 +44,8 @@
                                             class="block text-sm font-medium leading-6 text-gray-900">密码</label>
                                         <div class="mt-2">
                                             <input id="password" name="password" type="password"
-                                                autocomplete="current-password" required="true"
+                                                v-model="formRef.password" autocomplete="current-password"
+                                                required="true"
                                                 class="block w-full rounded-md pl-3 border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                         </div>
                                     </div>
@@ -64,9 +66,8 @@
                                     </div>
 
                                     <div>
-                                        <button @click.prevent="login"
-                                            class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign
-                                            in</button>
+                                        <button @click="login"
+                                            class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">登录</button>
                                     </div>
                                 </form>
                             </div>
@@ -109,28 +110,22 @@ const formRef: UnwrapRef<FormState> = reactive({
     mobile: '',
     captcha: ''
 })
-const login = async () => {
+
+const login = async (e) => {
+    e.preventDefault()
     const response = await axios.post('/api/login', {
-        username: 'admin',
-        password: '123456',
+        username: formRef.username,
+        password: formRef.password,
     })
     const res = response.data;
     console.log(res)
     if (res.code == 200) {
         // mock用,可删
-        if (res.code === 403) {
-            // formRef.password = ''
-            // state.loginBtn = false
-            return
-        }
-        // if (config.useAsyncRouter) {
-        //     generateAsyncRoutes(router, res.menu)
-        // }
+
         console.log(res)
         loginSuccess(res.data, router)
     } else {
         requestFailed(res)
-        // formRef.password = ''
     }
 }
 </script>

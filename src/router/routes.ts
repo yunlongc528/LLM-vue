@@ -25,7 +25,7 @@ export const constantRoute: RouteRecordRaw[] = [
                 meta: { title: '案件研判', keepAlive: false },
             },
             {
-                path: '/large-model/case-detail/:id',
+                path: '/large-model/case-analysis/:id',
                 name: 'caseDetail',
                 component: () =>
                     import(
@@ -91,6 +91,13 @@ export const constantRoute: RouteRecordRaw[] = [
                 component: () => import('@/views/management/index.vue'),
                 meta: { roles: ['user'], keepAlive: false, title: '问卷调查' },
             },
+            {
+                path: '/large-model/menu-management',
+                name: 'MenuManagement',
+                component: () =>
+                    import('@/views/admin/permissionsetting/index.vue'),
+                meta: { roles: ['admin'], keepAlive: false, title: '菜单管理' },
+            },
         ],
     },
     {
@@ -105,15 +112,15 @@ export const constantRoute: RouteRecordRaw[] = [
     },
     {
         path: '/:pathMatch(.*)*',
-        redirect: '/exception/403',
-        name: 'notFound',
+
+        component: () => import('@/views/exception/403.vue'),
     },
 ]
 export const privateRoutes = [
     {
         path: '/admin',
         name: 'admin',
-        component: () => import('@/views/admin/home/index.vue'),
+        component: () => import('@/views/admin/permissionsetting/index.vue'),
         meta: { roles: ['admin'] },
     },
 ]

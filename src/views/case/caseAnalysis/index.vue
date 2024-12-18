@@ -1,7 +1,7 @@
 <template>
     <div class="bg-white p-4 rounded-lg shadow-md">
         <h3 class="text-xl font-bold mb-4">数据看板</h3>
-        <div class="grid sm:grid-cols-3 lg:grid-cols-6 gap-1">
+        <div class="grid  lg:grid-cols-6 gap-1">
             <!-- New cases yesterday -->
             <div class=" bg-blue-600 text-white p-4 rounded-lg col-span-3 sm:col-span-3 md:col-span-3 lg:col-span-1">
                 <h3 class="text-sm font-semibold mb-2">昨日新增案件</h3>
@@ -19,7 +19,7 @@
             <!-- Yesterday's case element analysis -->
             <div class="col-span-3  overflow-hidden rounded-lg shadow p-1">
                 <h3 class="text-sm font-semibold mb-2">昨日案件要素研判</h3>
-                <div class="grid grid-cols-1 h-full md:grid-cols-4 gap-1">
+                <div class="grid  sm:grid-cols-1 h-full md:grid-cols-2 lg:grid-cols-4 gap-1">
                     <div v-for="(item, index) in caseElements" :key="index" class="bg-gray-100 p-3 rounded-lg">
                         <div class="text-sm text-gray-600 flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" :class="item.icon" fill="none" viewBox="0 0 24 24"
@@ -35,7 +35,7 @@
             </div>
 
             <!-- Total cumulative cases -->
-            <div class="bg-green-100 p-3 rounded-lg sm:col-span-3 lg:col-span-1">
+            <div class="bg-green-100 p-3 rounded-lg col-span-3 lg:col-span-1">
                 <div class="text-sm text-gray-600 flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -49,7 +49,7 @@
             </div>
 
             <!-- Total solved cases -->
-            <div class="bg-red-100 p-3 rounded-lg sm:col-span-3 lg:col-span-1">
+            <div class="bg-red-100 p-3 rounded-lg col-span-3 lg:col-span-1">
                 <div class="text-sm text-gray-600 flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">

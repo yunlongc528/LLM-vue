@@ -1,24 +1,27 @@
 <template>
     <div class="bg-white p-4 shadow-sm mt-2  rounded-lg ">
         <div class="flex justify-between items-center">
-            <div class="flex space-x-4">
+            <div class="flex ">
                 <button v-for="tab in tabs" :key="tab.id" @click="activeTab = tab.id" :class="[
-                    'px-4 py-2 text-sm font-medium rounded-md',
+                    'px-2 py-2 font-medium rounded-md',
                     activeTab === tab.id
-                        ? 'bg-blue-50 text-blue-600'
-                        : 'text-gray-500 hover:text-gray-700'
+                        ? ' text-blue-600 text-xl'
+                        : 'text-gray-500 text-sm hover:text-gray-700'
                 ]">
                     <span v-if="tab.icon" class="mr-2">{{ tab.icon }}</span>
                     {{ tab.label }}
                 </button>
             </div>
+
+        </div>
+        <div class="flex   bg-white p-2 rounded-lg shadow-sm">
             <div class="flex space-x-4">
                 <button @click="addNewCase"
-                    class="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                    class="px-2  bg-blue-600 text-white text-sm  rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                     + 新增案件
                 </button>
                 <button @click="batchImport"
-                    class="px-4 py-2 bg-white text-gray-700 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                    class="px-2  bg-white text-gray-700 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -27,13 +30,11 @@
                     批量导入
                 </button>
             </div>
-        </div>
-        <div class="flex items-center space-x-2 bg-white p-2 rounded-lg shadow-sm">
-            <div class="relative flex-grow">
+            <div class="relative ml-auto mr-2 w-1/3">
                 <input v-model="searchQuery" type="text" placeholder="请输入案件名称、编号、简要案情等"
                     class="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                 <button @click="performSearch"
-                    class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 hover:text-gray-700">
+                    class="absolute inset-y-0 right-0 flex items-center px-1 text-gray-500 hover:text-gray-700">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -41,34 +42,28 @@
                     </svg>
                 </button>
             </div>
-            <div class="flex items-center space-x-2">
+            <div class="flex   space-x-2">
                 <button @click="toggleFilter"
-                    class="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 ">
-                    筛选
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 inline-block" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
+                    class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 flex items-center"
+                    :aria-expanded="isSearchOpen">
+                    <span>筛选</span>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4 ml-1 transition-transform duration-200 ease-in-out"
+                        :class="{ 'rotate-180': isSearchOpen }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
                 <button @click="resetSearch"
-                    class="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                    class="px-3 py-1 border border-gray-300 rounded-md  font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                     重置
                 </button>
                 <button @click="toggleView"
                     class="p-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-                    </svg>
+                    <SvgIcon name="list-end" />
                 </button>
                 <button @click="showHistory"
                     class="p-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                    <SvgIcon name="settings" />
                 </button>
             </div>
         </div>
@@ -85,7 +80,7 @@ import CaseTable from './CaseTable.vue';
 import { TransitionRoot, TransitionChild } from "@headlessui/vue";
 import AddCase from './AddCase.vue';
 import CaseSearch from './CaseSearch.vue';
-
+import SvgIcon from '@/components/SvgIcon/index.vue'
 import axios from 'axios'
 
 interface Tab {

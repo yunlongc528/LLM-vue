@@ -3,10 +3,10 @@ import axios, {
     AxiosResponse,
     InternalAxiosRequestConfig,
 } from 'axios'
-import { ACCESS_TOKEN } from '@/store/mutation-types'
+import { ACCESS_TOKEN } from '@/stores/mutation-types'
 import { baseURL } from '@/utils/util'
 import ls from '@/utils/Storage'
-import { globalLoading } from '@/store/reactiveState'
+import { globalLoading } from '@/stores/reactiveState'
 const apiBaseUrl = 'http://41.205.121.106:80'
 
 const useMock = import.meta.env.VITE_APP_USE_MOCK === 'true'

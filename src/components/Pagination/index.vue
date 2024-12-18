@@ -1,96 +1,122 @@
 <template>
-    <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
-        <div class="flex flex-1 justify-between sm:hidden">
-            <button @click="prevPage"
-                class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                :disabled="currentPage === 1">Previous</button>
-            <button @click="nextPage"
-                class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                :disabled="currentPage === totalPages">Next</button>
+    <div class="flex items-center gap-2">
+        <button @click="handlePageChange(currentPage - 1)" :disabled="currentPage === 1"
+            class="px-2 py-1 text-gray-600 disabled:text-gray-300 hover:text-blue-600 disabled:hover:text-gray-300"
+            aria-label="Previous page">
+            &lt;
+        </button>
+
+        <div class="flex gap-2">
+            <!-- First page -->
+            <button @click="handlePageChange(1)" :class="getButtonClasses(1)">
+                1
+            </button>
+
+            <!-- Left ellipsis -->
+            <span v-if="showLeftEllipsis" class="px-1">...</span>
+
+            <!-- Pages before current -->
+            <button v-for="page in pagesBefore" :key="page" @click="handlePageChange(page)"
+                :class="getButtonClasses(page)">
+                {{ page }}
+            </button>
+
+            <!-- Current page -->
+            <button v-if="currentPage > 1 && currentPage < totalPages" :class="getButtonClasses(currentPage)">
+                {{ currentPage }}
+            </button>
+
+            <!-- Pages after current -->
+            <button v-for="page in pagesAfter" :key="page" @click="handlePageChange(page)"
+                :class="getButtonClasses(page)">
+                {{ page }}
+            </button>
+
+            <!-- Right ellipsis -->
+            <span v-if="showRightEllipsis" class="px-1">...</span>
+
+            <!-- Last page -->
+            <button v-if="totalPages > 1" @click="handlePageChange(totalPages)" :class="getButtonClasses(totalPages)">
+                {{ totalPages }}
+            </button>
         </div>
 
-        <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-            <div>
-                <p class="text-sm text-gray-700">
-                    <!-- Showing -->
-                    <!-- {{ (currentPage - 1) * itemsPerPage + 1 }} to
-                    {{ Math.min(currentPage * itemsPerPage, totalItems) }} of
-                    <span class="font-medium">{{ totalItems }}</span> results -->
-                </p>
-            </div>
-            <div>
-                <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-                    <button @click="prevPage"
-                        class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                        :disabled="currentPage === 1">
-                        <span class="sr-only">Previous</span>
-                        <ChevronLeftIcon class="h-5 w-5" aria-hidden="true" />
-                    </button>
-                    <template v-for="page in pages" :key="page">
-                        <button @click="changePage(page)"
-                            :class="['relative inline-flex items-center px-4 py-2 text-sm font-semibold', { 'bg-indigo-600 text-white': page === currentPage, 'text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50': page !== currentPage }]"
-                            aria-current="page">
-                            {{ page }}
-                        </button>
-                    </template>
-                    <button @click="nextPage"
-                        class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                        :disabled="currentPage === totalPages">
-                        <span class="sr-only">Next</span>
-                        <ChevronRightIcon class="h-5 w-5" aria-hidden="true" />
-                    </button>
-                </nav>
-            </div>
-        </div>
+        <button @click="handlePageChange(currentPage + 1)" :disabled="currentPage === totalPages"
+            class="px-2 py-1 text-gray-600 disabled:text-gray-300 hover:text-blue-600 disabled:hover:text-gray-300"
+            aria-label="Next page">
+            &gt;
+        </button>
     </div>
 </template>
 
-<script setup>
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/20/solid'
-import { ref, computed } from 'vue';
-const emit = defineEmits(['page-changed']);
-const props = defineProps({
-    totalItems: {
-        type: Number,
-        required: true
-    },
-    itemsPerPage: {
-        type: Number,
-        default: 10
-    }
-});
+<script setup lang="ts">
+import { computed } from 'vue'
 
-const currentPage = ref(1);
-const totalPages = computed(() => Math.ceil(props.totalItems / props.itemsPerPage));
+interface Props {
+    currentPage: number
+    totalPages: number
+    siblingCount?: number
+}
 
-const pages = computed(() => {
-    const pageArray = [];
-    for (let i = 1; i <= totalPages.value; i++) {
-        pageArray.push(i);
-    }
-    return pageArray;
-});
+interface Emits {
+    (e: 'update:currentPage', page: number): void
+    (e: 'change', page: number): void
+}
 
-const changePage = (page) => {
-    if (currentPage.value !== page) {
-        currentPage.value = page;
-        emit('page-changed', page); // 发射事件，传递当前页码
-    }
-};
+const props = withDefaults(defineProps<Props>(), {
+    currentPage: 1,
+    totalPages: 1,
+    siblingCount: 2
+})
 
-const nextPage = () => {
-    if (currentPage.value < totalPages.value) {
-        changePage(currentPage.value + 1);
-    }
-};
+const emit = defineEmits<Emits>()
 
-const prevPage = () => {
-    if (currentPage.value > 1) {
-        changePage(currentPage.value - 1);
-    }
-};
+const handlePageChange = (page: number) => {
+    if (page < 1 || page > props.totalPages) return
+    emit('update:currentPage', page)
+    emit('change', page)
+}
+
+const getButtonClasses = (page: number): string => {
+    return [
+        'w-8 h-8 flex items-center justify-center rounded',
+        props.currentPage === page
+            ? 'border-2 border-blue-500 text-blue-600'
+            : 'text-gray-600 hover:text-blue-600'
+    ].join(' ')
+}
+
+// Calculate the range of pages to show
+const pagesBefore = computed(() => {
+    const start = Math.max(
+        props.currentPage - props.siblingCount,
+        2
+    )
+    const end = props.currentPage - 1
+    return Array.from(
+        { length: end - start + 1 },
+        (_, i) => start + i
+    ).filter(page => page > 1)
+})
+
+const pagesAfter = computed(() => {
+    const start = props.currentPage + 1
+    const end = Math.min(
+        props.currentPage + props.siblingCount,
+        props.totalPages - 1
+    )
+    return Array.from(
+        { length: end - start + 1 },
+        (_, i) => start + i
+    ).filter(page => page < props.totalPages)
+})
+
+// Determine when to show ellipsis
+const showLeftEllipsis = computed(() => {
+    return props.currentPage - props.siblingCount > 2
+})
+
+const showRightEllipsis = computed(() => {
+    return props.currentPage + props.siblingCount < props.totalPages - 1
+})
 </script>
-
-<style scoped>
-/* 这里可以添加特定于分页器组件的样式 */
-</style>

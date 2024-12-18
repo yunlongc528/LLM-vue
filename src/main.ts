@@ -8,7 +8,6 @@ import router from './router' // 路由
 import { createPinia } from 'pinia' // 状态管理
 import { notificationPlugin } from './plugins/notificate/notification-plugin' // 通知插件
 import globalComponent from '@/components' // 全局组件注册
-
 // 初始化 Mock 数据（开发模式）
 async function setupMocks() {
     if (import.meta.env.MODE === 'development') {
@@ -26,7 +25,6 @@ async function bootstrap() {
     app.use(router)
     app.use(notificationPlugin)
     app.use(globalComponent)
-
     await setupMocks() // 初始化 Mock 数据
     app.mount('#app')
 }

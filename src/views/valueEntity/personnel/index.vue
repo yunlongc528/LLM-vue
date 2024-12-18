@@ -110,11 +110,11 @@ const tabs = [
 
 
 const people = [
-    { id: 1, name: '案件解析' },
-    { id: 2, name: '现勘解析' },
-    { id: 3, name: '笔录解析' },
-    { id: 4, name: '智能调正' },
-    { id: 5, name: '人工创建' },
+    { value: 1, label: '案件解析' },
+    { value: 2, label: '现勘解析' },
+    { value: 3, label: '笔录解析' },
+    { value: 4, label: '智能调正' },
+    { value: 5, label: '人工创建' },
 ]
 
 const selected = ref()

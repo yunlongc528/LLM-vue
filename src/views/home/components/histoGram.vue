@@ -28,17 +28,17 @@ const data: ChartData = {
     labels: ['嫌疑人', '银行卡', '手机号', '虚拟账户', '虚拟空间', 'App', '地址'],
     datasets: [
         {
-            label: '类型1',
+            label: '初始要素',
             data: [2, 0, 0, 0, 0, 0, 0],
             backgroundColor: 'rgb(99, 132, 255)',
         },
         {
-            label: '类型2',
+            label: '调证次数',
             data: [9, 3, 2, 2, 4, 2, 0],
             backgroundColor: 'rgb(75, 222, 172)',
         },
         {
-            label: '类型3',
+            label: '拓展要素',
             data: [9, 2, 2, 2, 5, 4, 2],
             backgroundColor: 'rgb(139, 92, 246)',
         },
@@ -72,19 +72,12 @@ onMounted(() => {
                 },
                 plugins: {
                     legend: {
-                        display: false,
-                    },
-                    title: {
-                        display: true,
-                        text: '含关键要素案件',
-                        font: {
-                            size: 16,
-                            weight: 'bold',
-                        },
-                        padding: {
-                            bottom: 30,
-                        },
-                    },
+                        position: 'top',
+                        labels: {
+                            usePointStyle: true,
+                            pointStyle: 'rect'
+                        }
+                    }
                 },
                 // barPercentage: 0.8,
                 // categoryPercentage: 0.7,

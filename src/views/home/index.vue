@@ -67,7 +67,7 @@
                                     </dl>
                                     <div class="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 ">
                                         <div class="overflow-hidden rounded-lg bg-white px-2 py-2 shadow sm:p-4">
-                                            <dt class="truncate text-sm font-semibold text-gray-900">含关键要素案件</dt>
+                                            <dt class="truncate text-xl font-semibold text-gray-900">含关键要素案件</dt>
                                             <dd class="mt-1 text-sm ont-semibold  tracking-tight text-gray-900">
                                                 <div class="flex mt-2">
                                                     <SideHistoFram />
@@ -76,7 +76,7 @@
                                             </dd>
                                         </div>
                                         <div class="overflow-hidden rounded-lg bg-white px-1 py-1 shadow sm:p-3">
-                                            <dt class="truncate text-sm font-semibold text-gray-900">可研判案件</dt>
+                                            <dt class="truncate text-xl font-semibold text-gray-900">可研判案件</dt>
                                             <dd class="h-full">
                                                 <PieChart />
                                             </dd>
@@ -84,7 +84,7 @@
                                     </div>
                                     <div class="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-1 ">
                                         <div class="overflow-hidden rounded-lg bg-white px-2 py-2 shadow sm:p-4">
-                                            <dt class="truncate text-sm font-semibold text-gray-900">含关键要素案件</dt>
+                                            <dt class="truncate text-xl font-semibold text-gray-900">含关键要素案件</dt>
                                             <dd class="h-96">
                                                 <histoGram />
                                             </dd>

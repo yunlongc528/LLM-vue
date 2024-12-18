@@ -1,6 +1,6 @@
 import { start, close } from '@/utils/nprogress'
 import ls from '@/utils/Storage'
-import { ACCESS_TOKEN, PERMISSION, USER_INFO } from '@/store/mutation-types'
+import { ACCESS_TOKEN, PERMISSION, USER_INFO } from '@/stores/mutation-types'
 import type { Router, RouteLocationNormalized } from 'vue-router'
 import { notify } from '@/plugins/notificate/notification-plugin'
 import { hasPermission } from './permission'
@@ -15,6 +15,8 @@ const whiteList = [
     'recordAnalysis',
     'scoutingMap',
     'case',
+    'MenuManagement',
+    'notFound',
 ] // 已开发完成的页面
 const defaultRoutePath = '/large-model/homeLayout'
 

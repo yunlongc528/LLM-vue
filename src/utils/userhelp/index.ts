@@ -1,6 +1,6 @@
 import ls from '@/utils/Storage'
 import { Router } from 'vue-router'
-import { ACCESS_TOKEN, USER_INFO } from '@/store/mutation-types'
+import { ACCESS_TOKEN, USER_INFO } from '@/stores/mutation-types'
 // import notify from '@/plugins/notification/notify'
 
 export const loginSuccess = (res, router: Router) => {

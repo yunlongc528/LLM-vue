@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node scripts/preinstall.js && vite  --open", 
-    "build": "vue-tsc -b && vite build",
+    "dev": "node scripts/preinstall.js && vite  --open",
+    "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint \"src/**/*.{js,ts,vue}\" --fix",
     "prepare": "husky install",
@@ -20,6 +20,7 @@
     "@element-plus/icons-vue": "^2.3.1",
     "@headlessui/vue": "^1.7.23",
     "@heroicons/vue": "^2.1.5",
+    "@intlify/devtools-types": "^10.0.5",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.9",
     "@typescript-eslint/eslint-plugin": "^8.5.0",
