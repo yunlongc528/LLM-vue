@@ -37,7 +37,8 @@
                                                     <h1 class="text-2xl font-bold text-gray-800">
                                                     </h1>
                                                     <div class="mt-4 flex space-x-2">
-                                                        <router-link to='/large-model/case-analysis/A213/analysis'
+                                                        <router-link
+                                                            :to="`/large-model/case-analysis/${caseInfos.id}/analysis`"
                                                             class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-300">
                                                             进入案件研判
                                                         </router-link>

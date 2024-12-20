@@ -162,7 +162,6 @@ import {
 import { useRoute } from 'vue-router';
 const route = useRoute();
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
-console.log(JSON.parse(ls.get('menuItems')))
 const management = reactive(JSON.parse(ls.get('menuItems')))
 const menu = [
     { name: '首页', href: '/large-model/homeLayout' },
@@ -191,6 +190,7 @@ const isManagementActive = computed(() => {
     return management.some(item => route.path.startsWith(item.href));
 });
 const isActive = (item) => {
+    console.log(route.path.startsWith(item.href))
     // Check if the current route path starts with the item's href
     return route.path.startsWith(item.href) && item.href !== '/'
         || route.path === item.href;

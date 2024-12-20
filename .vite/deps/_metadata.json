@@ -1,0 +1,124 @@
+{
+  "hash": "34deb871",
+  "configHash": "cc8b9185",
+  "lockfileHash": "9225de95",
+  "browserHash": "9067c574",
+  "optimized": {
+    "@antv/x6": {
+      "src": "../../node_modules/.pnpm/@antv+x6@2.18.1/node_modules/@antv/x6/es/index.js",
+      "file": "@antv_x6.js",
+      "fileHash": "8577d931",
+      "needsInterop": false
+    },
+    "@antv/x6-plugin-selection": {
+      "src": "../../node_modules/.pnpm/@antv+x6-plugin-selection@2.2.2_@antv+x6@2.18.1/node_modules/@antv/x6-plugin-selection/es/index.js",
+      "file": "@antv_x6-plugin-selection.js",
+      "fileHash": "f76d7fad",
+      "needsInterop": false
+    },
+    "@antv/x6-vue-shape": {
+      "src": "../../node_modules/.pnpm/@antv+x6-vue-shape@2.1.2_@antv+x6@2.18.1_vue@3.5.5_typescript@5.6.2_/node_modules/@antv/x6-vue-shape/es/index.js",
+      "file": "@antv_x6-vue-shape.js",
+      "fileHash": "40ab97ec",
+      "needsInterop": false
+    },
+    "@headlessui/vue": {
+      "src": "../../node_modules/.pnpm/@headlessui+vue@1.7.23_vue@3.5.5_typescript@5.6.2_/node_modules/@headlessui/vue/dist/headlessui.esm.js",
+      "file": "@headlessui_vue.js",
+      "fileHash": "351e240d",
+      "needsInterop": false
+    },
+    "@heroicons/vue/20/solid": {
+      "src": "../../node_modules/.pnpm/@heroicons+vue@2.1.5_vue@3.5.5_typescript@5.6.2_/node_modules/@heroicons/vue/20/solid/esm/index.js",
+      "file": "@heroicons_vue_20_solid.js",
+      "fileHash": "2abb0b86",
+      "needsInterop": false
+    },
+    "@heroicons/vue/24/outline": {
+      "src": "../../node_modules/.pnpm/@heroicons+vue@2.1.5_vue@3.5.5_typescript@5.6.2_/node_modules/@heroicons/vue/24/outline/esm/index.js",
+      "file": "@heroicons_vue_24_outline.js",
+      "fileHash": "bc145169",
+      "needsInterop": false
+    },
+    "axios": {
+      "src": "../../node_modules/.pnpm/axios@1.7.7/node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "9aeffbac",
+      "needsInterop": false
+    },
+    "chart.js": {
+      "src": "../../node_modules/.pnpm/chart.js@4.4.5/node_modules/chart.js/dist/chart.js",
+      "file": "chart__js.js",
+      "fileHash": "6f969066",
+      "needsInterop": false
+    },
+    "chart.js/auto": {
+      "src": "../../node_modules/.pnpm/chart.js@4.4.5/node_modules/chart.js/auto/auto.js",
+      "file": "chart__js_auto.js",
+      "fileHash": "711b0524",
+      "needsInterop": false
+    },
+    "dayjs": {
+      "src": "../../node_modules/.pnpm/dayjs@1.11.13/node_modules/dayjs/dayjs.min.js",
+      "file": "dayjs.js",
+      "fileHash": "6599b94c",
+      "needsInterop": true
+    },
+    "lucide-vue-next": {
+      "src": "../../node_modules/.pnpm/lucide-vue-next@0.462.0_vue@3.5.5_typescript@5.6.2_/node_modules/lucide-vue-next/dist/esm/lucide-vue-next.js",
+      "file": "lucide-vue-next.js",
+      "fileHash": "f00ed1ee",
+      "needsInterop": false
+    },
+    "mockjs": {
+      "src": "../../node_modules/.pnpm/mockjs@1.1.0/node_modules/mockjs/dist/mock.js",
+      "file": "mockjs.js",
+      "fileHash": "24d4bec7",
+      "needsInterop": true
+    },
+    "nprogress": {
+      "src": "../../node_modules/.pnpm/nprogress@0.2.0/node_modules/nprogress/nprogress.js",
+      "file": "nprogress.js",
+      "fileHash": "d9bd4310",
+      "needsInterop": true
+    },
+    "pinia": {
+      "src": "../../node_modules/.pnpm/pinia@2.2.2_typescript@5.6.2_vue@3.5.5_typescript@5.6.2_/node_modules/pinia/dist/pinia.mjs",
+      "file": "pinia.js",
+      "fileHash": "3ac78745",
+      "needsInterop": false
+    },
+    "vue": {
+      "src": "../../node_modules/.pnpm/vue@3.5.5_typescript@5.6.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "8aabad75",
+      "needsInterop": false
+    },
+    "vue-router": {
+      "src": "../../node_modules/.pnpm/vue-router@4.4.5_vue@3.5.5_typescript@5.6.2_/node_modules/vue-router/dist/vue-router.mjs",
+      "file": "vue-router.js",
+      "fileHash": "21dd257c",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-VFJKRD2L": {
+      "file": "chunk-VFJKRD2L.js"
+    },
+    "chunk-BPR5FKHA": {
+      "file": "chunk-BPR5FKHA.js"
+    },
+    "chunk-QDN54C3U": {
+      "file": "chunk-QDN54C3U.js"
+    },
+    "chunk-MGCWKRQP": {
+      "file": "chunk-MGCWKRQP.js"
+    },
+    "chunk-7CPSAFUW": {
+      "file": "chunk-7CPSAFUW.js"
+    },
+    "chunk-L6OFPWCY": {
+      "file": "chunk-L6OFPWCY.js"
+    }
+  }
+}
