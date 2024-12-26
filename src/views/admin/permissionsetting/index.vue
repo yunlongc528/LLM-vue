@@ -11,7 +11,7 @@
 
         <!-- Action Buttons -->
         <div class="mb-6 flex items-center space-x-4">
-            <Input type="text" placeholder="请输入菜单名称" />
+            <Input v-model="searchText" placeholder="请输入菜单名称" />
             <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 flex items-center">
                 <SearchIcon class="w-4 h-4 mr-2" />
                 查询
@@ -71,7 +71,7 @@ interface MenuItem {
     sort: number
     type: string
 }
-
+let searchText = ref('')
 const tableHeaders = [
     { prop: 'name', label: '菜单名称', width: 150, fixed: true },
     { prop: 'icon', label: '图标' },

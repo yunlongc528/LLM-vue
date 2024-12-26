@@ -1,5 +1,6 @@
 <template>
     <div class="flex items-center gap-2">
+        <div class="text-sm text-gray-500">共{{ totalPages }}条</div>
         <button @click="handlePageChange(currentPage - 1)" :disabled="currentPage === 1"
             class="px-2 py-1 text-gray-600 disabled:text-gray-300 hover:text-blue-600 disabled:hover:text-gray-300"
             aria-label="Previous page">

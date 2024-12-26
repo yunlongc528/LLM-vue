@@ -1,33 +1,10 @@
 {
     "compilerOptions": {
-        /* 基本编译选项 */
-        "target": "ES2022",
-        "lib": ["ES2023"],
-        "module": "ESNext",
-        "skipLibCheck": true,
-
-        /* 路径和模块解析 */
         "baseUrl": ".",
-        "moduleResolution": "bundler",
+        "moduleResolution": "node",
+        "module": "es2020",
         "paths": {
             "@/*": ["src/*"]
-        },
-        "allowImportingTsExtensions": true,
-        "isolatedModules": true,
-        "moduleDetection": "force",
-        "noEmit": true,
-
-        /* Linting */
-        "strict": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true
-    },
-    "include": [
-        "vite.config.ts",
-        "src/**/*.ts",
-        "src/**/*.vue",
-        "tests/**/*.ts",
-        "src/utils/nprogress"
-    ]
+        }
+    }
 }

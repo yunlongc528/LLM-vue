@@ -1,10 +1,8 @@
 <template>
     <div class="relative inline-block">
-        <input :value="modelValue" @input="updateValue" :class="[
-            'rounded-md py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600',
-            sizeClasses, width,
-            { 'pr-10': suffixIcon }
-        ]" :placeholder="placeholder" :style="style" />
+        <input :value="modelValue" @input="updateValue"
+            :class="[inputBaseClasses, sizeClasses, width, { 'pr-10': suffixIcon }]" :placeholder="placeholder"
+            :style="style" />
         <div v-if="isValidSuffixIcon" class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
             <component :is="suffixIcon" class="w-5 text-gray-400" />
         </div>
@@ -21,6 +19,8 @@ const SIZES = {
     small: 'text-sm h-10',
     default: 'text-base h-11'
 } as const
+
+const INPUT_BASE_CLASSES = 'rounded-md py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600'
 
 interface InputProps {
     modelValue: string | number
@@ -47,9 +47,18 @@ const emit = defineEmits<{
 const updateValue = (event: Event) => {
     const target = event.target as HTMLInputElement
     if (!target) return
-    // 确保类型一致
-    const newValue = target.value
-    emit('update:modelValue', typeof props.modelValue === 'number' ? parseFloat(newValue) : newValue)
+
+    const newValue = target.value.trim()
+    let parsedValue: string | number
+
+    if (typeof props.modelValue === 'number') {
+        const numValue = parseFloat(newValue)
+        parsedValue = isNaN(numValue) ? props.modelValue : numValue
+    } else {
+        parsedValue = newValue
+    }
+
+    emit('update:modelValue', parsedValue)
 }
 
 const isValidSuffixIcon = computed(() => !!props.suffixIcon)
@@ -57,4 +66,6 @@ const isValidSuffixIcon = computed(() => !!props.suffixIcon)
 const sizeClasses = computed(() => {
     return SIZES[props.size] || SIZES.default
 })
+
+const inputBaseClasses = INPUT_BASE_CLASSES
 </script>

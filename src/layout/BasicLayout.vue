@@ -20,7 +20,5 @@
 import headLayout from './headLayout.vue';
 
 
-// import { mapActions } from 'pinia';
-// import * as api from '@/api/user/index'
 
 </script>

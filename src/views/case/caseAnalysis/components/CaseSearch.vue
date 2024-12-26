@@ -15,7 +15,7 @@
                 <SelectMenus v-model="formData.filingUnit" :options="filingUnitList" placeholder="全部立案单位" />
                 <SelectMenus v-model="formData.updater" :options="updaterList" placeholder="全部更新人" />
 
-                <div class="col-span-2 flex items-center space-x-2">
+                <div class="col-span-2 flex items-center space-x-2 ">
                     <span class="whitespace-nowrap">受理时间:</span>
                     <DatePicker v-model="formData.acceptanceDate" format="YYYY年MM月DD日" />
                 </div>
@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { reactive } from 'vue'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import DatePicker from '@/components/DatePicker/index.vue'
 import SelectMenus from '@/components/SelectMenus/index.vue'
@@ -69,7 +69,7 @@ interface FormData {
 const handlePopupScroll = (event: Event) => {
     console.log('Popup scrolled', event)
 }
-const props = defineProps<{
+defineProps<{
     open: boolean
 }>()
 

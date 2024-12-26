@@ -15,7 +15,8 @@
             <div class="bg-white rounded-lg shadow p-6">
                 <h3 class="text-lg font-semibold mb-4">实体数量统计</h3>
                 <div class="grid grid-cols-3 gap-4">
-                    <div class="bg-blue-600 text-white rounded-lg p-4 ">
+                    <div class="bg-blue-600 text-white rounded-lg p-4 bg-no-repeat bg-cover"
+                        style="background-image: url('/public/data-card.png');">
                         <div class="text-sm">人员实体数</div>
                         <div class="text-3xl font-bold my-2">2</div>
                     </div>

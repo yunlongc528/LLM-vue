@@ -13,27 +13,30 @@
                             leave-from="translate-x-0" leave-to="translate-x-full">
                             <DialogPanel class="pointer-events-auto w-screen max-w-md">
                                 <div class="flex h-full flex-col overflow-y-scroll bg-white  shadow-xl">
-                                    <div class="px-4 sm:px-6">
-                                        <div class="flex items-start justify-between  pt-3">
-                                            <DialogTitle class="text-2xl font-bold text-gray-800 leading-6">{{
-                                                caseInfos.name }}</DialogTitle>
-                                            <div class="ml-3 flex h-7 items-center">
-                                                <button type="button"
-                                                    class="relative rounded-md bg-white text-gray-400 hover:text-gray-500 "
-                                                    @click="$emit('close')">
-                                                    <div class="absolute -inset-2.5" />
-                                                    <div class="sr-only">Close panel</div>
-                                                    <XMarkIcon class="h-6 w-6" aria-hidden="true" />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                     <div class="relative ">
+
                                         <!-- <slot /> -->
                                         <div class="bg-gray-100 min-h-screen">
-                                            <div
-                                                class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-                                                <div class="p-4 border-b">
+                                            <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden bg-no-repeat"
+                                                style="background-image: url(&quot;/public/drawer-bg.png&quot;); background-size: 100% 220px;">
+                                                <div class="px-4 sm:px-6">
+                                                    <div class="flex items-start justify-between  pt-3">
+                                                        <DialogTitle class="text-2xl font-bold text-gray-800 leading-4">
+                                                            {{
+                                                                caseInfos.name }}</DialogTitle>
+                                                        <div class="ml-3 flex h-7 items-center">
+                                                            <button type="button"
+                                                                class="relative rounded-md bg-white text-gray-400 hover:text-gray-500 "
+                                                                @click="$emit('close')">
+                                                                <div class="absolute -inset-2.5" />
+                                                                <div class="sr-only">Close panel</div>
+                                                                <XMarkIcon class="h-6 w-6" aria-hidden="true" />
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="px-4 border-b">
                                                     <h1 class="text-2xl font-bold text-gray-800">
                                                     </h1>
                                                     <div class="mt-4 flex space-x-2">

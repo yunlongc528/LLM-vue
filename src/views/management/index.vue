@@ -56,50 +56,7 @@
                 </template>
             </Table>
             <!-- Data Table -->
-            <!-- <table class="w-full mb-4">
-                <thead>
-                    <tr class="bg-gray-50">
-                        <th class="px-4 py-2 text-left text-gray-500 font-normal">案件名称/编号</th>
-                        <th class="px-4 py-2 text-left text-gray-500 font-normal">提交用户</th>
-                        <th class="px-4 py-2 text-left text-gray-500 font-normal">提交时间</th>
-                        <th class="px-4 py-2 text-left text-gray-500 font-normal">问卷总分</th>
-                        <th class="px-4 py-2 text-left text-gray-500 font-normal">解析评分</th>
-                        <th class="px-4 py-2 text-left text-gray-500 font-normal">调正评分</th>
-                        <th class="px-4 py-2 text-left text-gray-500 font-normal">资金流评分</th>
-                        <th class="px-4 py-2 text-left text-gray-500 font-normal">人员流评分</th>
-                        <th class="px-4 py-2 text-left text-gray-500 font-normal">地址推理评分</th>
-                        <th class="px-4 py-2 text-left text-gray-500 font-normal">操作</th>
-                    </tr>
-                </thead>
-                <tbody v-if="tableData.length === 0" class="w-full">
-                    <tr>
-                        <td colspan="10" class="h-[calc(100vh-200px)]">
-                            <div class="flex items-center justify-center 	">
-                                <img src="/public/no-data.png" class="h-32">
-                            </div>
-                            <div class="text-center">暂无数据</div>
-                        </td>
-                    </tr>
-                </tbody>
-                <tbody v-else>
-                    <tr v-for="item in tableData" :key="item.id" class="border-b border-gray-200">
-                        <td class="px-4 py-2">{{ item.name }}</td>
-                        <td class="px-4 py-2">{{ item.idNumber }}</td>
-                        <td class="px-4 py-2">{{ item.label }}</td>
-                        <td class="px-4 py-2">{{ item.label }}</td>
-                        <td class="px-4 py-2">{{ item.label }}</td>
-                        <td class="px-4 py-2">{{ item.label }}</td>
-                        <td class="px-4 py-2 text-blue-600">{{ item.caseCount }}</td>
-                        <td class="px-4 py-2">{{ item.source }}</td>
-                        <td class="px-4 py-2">{{ item.department }}</td>
-                        <td class="px-4 py-2">
-                            <button class="text-blue-600">删除</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table> -->
 
-            <!-- Pagination -->
             <div v-if="tableData.length != 0">
                 <pagination :totalItems="100" :itemsPerPage="10" />
             </div>
@@ -116,9 +73,9 @@ import Table from '@/components/Table/index.vue'
 
 import { Inbox as IconInbox } from 'lucide-vue-next';
 const columns = [
-    { prop: 'date', label: '案件名称', width: 150, fixed: true },
-    { prop: 'name', label: '提交用户', width: 120 },
-    { prop: 'state', label: '提交时间', width: 220 },
+    { prop: 'date', label: '案件名称', fixed: true },
+    { prop: 'name', label: '提交用户', },
+    { prop: 'state', label: '提交时间', },
     { prop: 'city', label: '问卷总分', width: 120 },
 
     { prop: 'address', label: '解析评分', width: 120 },
